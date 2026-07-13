@@ -1,0 +1,33 @@
+.page {
+    max-width: var(--breakpoint-wide);
+    margin: 0 auto;
+    padding: var(--spacing-md);
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-lg);
+}
+
+.statusMessage {
+    text-align: center;
+    color: var(--color-text-muted);
+    padding: var(--spacing-xl) 0;
+}
+
+.errorMessage {
+    text-align: center;
+    color: var(--color-error);
+    padding: var(--spacing-xl) 0;
+}
+
+@media (min-width: 768px) {
+    .page {
+        padding: var(--spacing-lg);
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+}
