@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import type { Review } from '../../types/vehicle';
 import ReviewItem from '../ReviewItem/ReviewItem';
+import Button from '../../ui/Button/Button';
 import styles from './ReviewList.module.css';
-import {PAGE_SIZE} from "../../constants/constants.ts";
+import { PAGE_SIZE } from '../../constants/constants.ts';
 
 interface ReviewListProps {
     reviews: Review[];
@@ -41,27 +42,27 @@ const ReviewList = ({ reviews }: ReviewListProps) => {
 
             {totalPages > 1 && (
                 <nav className={styles.pagination} aria-label="Пагінація відгуків">
-                    <button
-                        type="button"
-                        className={styles.pageButton}
+                    <Button
+                        variant="icon"
                         onClick={handlePrevPage}
                         disabled={currentPage === 1}
                         aria-label="Попередня сторінка"
                     >
                         ←
-                    </button>
+                    </Button>
+
                     <span className={styles.pageInfo}>
                         {currentPage} з {totalPages}
                     </span>
-                    <button
-                        type="button"
-                        className={styles.pageButton}
+
+                    <Button
+                        variant="icon"
                         onClick={handleNextPage}
                         disabled={currentPage === totalPages}
                         aria-label="Наступна сторінка"
                     >
                         →
-                    </button>
+                    </Button>
                 </nav>
             )}
         </div>

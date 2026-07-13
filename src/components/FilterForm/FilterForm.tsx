@@ -4,6 +4,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { filterFormSchema, type FilterFormValues } from '../../utils/validation';
 import { useDebounce } from '../../hooks/useDebounce';
 import type { FilterParams } from '../../types/vehicle';
+import Input from '../../ui/Input/Input';
+import Select from '../../ui/Select/Select';
+import Button from '../../ui/Button/Button';
+import FormField from "../../ui/FormField/FormField.tsx";
 import styles from './FilterForm.module.css';
 import { z } from 'zod';
 
@@ -66,29 +70,12 @@ const FilterForm = ({ brands, onFilterChange }: FilterFormProps) => {
 
     return (
         <form className={styles.form}>
-            <div className={styles.field}>
-                <label className={styles.label} htmlFor="search">
-                    Пошук за назвою
-                </label>
+            <FormField label="Пошук за назвою" htmlFor="search">
+                <Input id="search" type="text" {...register('search')} />
+            </FormField>
 
-                <input
-                    className={styles.input}
-                    id="search"
-                    type="text"
-                    {...register('search')}
-                />
-            </div>
-
-            <div className={styles.field}>
-                <label className={styles.label} htmlFor="brand">
-                    Бренд
-                </label>
-
-                <select
-                    className={styles.select}
-                    id="brand"
-                    {...register('brand')}
-                >
+            <FormField label="Бренд" htmlFor="brand">
+                <Select id="brand" {...register('brand')}>
                     <option value="">Усі бренди</option>
 
                     {brands.map((brandName) => (
@@ -96,17 +83,17 @@ const FilterForm = ({ brands, onFilterChange }: FilterFormProps) => {
                             {brandName}
                         </option>
                     ))}
-                </select>
-            </div>
+                </Select>
+            </FormField>
 
             <div className={styles.priceRow}>
-                <div className={styles.field}>
-                    <label className={styles.label} htmlFor="minPrice">
-                        Ціна від
-                    </label>
-
-                    <input
-                        className={styles.input}
+                <FormField
+                    label="Ціна від"
+                    htmlFor="minPrice"
+                    error={errors.minPrice?.message}
+                    errorPosition="absolute"
+                >
+                    <Input
                         id="minPrice"
                         type="number"
                         min={0}
@@ -124,23 +111,15 @@ const FilterForm = ({ brands, onFilterChange }: FilterFormProps) => {
                             },
                         })}
                     />
+                </FormField>
 
-                    <span
-                        className={`${styles.error} ${
-                            errors.minPrice ? styles.visible : ''
-                        }`}
-                    >
-                        {errors.minPrice?.message ?? '\u00A0'}
-                    </span>
-                </div>
-
-                <div className={styles.field}>
-                    <label className={styles.label} htmlFor="maxPrice">
-                        Ціна до
-                    </label>
-
-                    <input
-                        className={styles.input}
+                <FormField
+                    label="Ціна до"
+                    htmlFor="maxPrice"
+                    error={errors.maxPrice?.message}
+                    errorPosition="absolute"
+                >
+                    <Input
                         id="maxPrice"
                         type="number"
                         min={0}
@@ -158,24 +137,12 @@ const FilterForm = ({ brands, onFilterChange }: FilterFormProps) => {
                             },
                         })}
                     />
-
-                    <span
-                        className={`${styles.error} ${
-                            errors.maxPrice ? styles.visible : ''
-                        }`}
-                    >
-                        {errors.maxPrice?.message ?? '\u00A0'}
-                    </span>
-                </div>
+                </FormField>
             </div>
 
-            <button
-                type="button"
-                className={styles.resetButton}
-                onClick={handleReset}
-            >
+            <Button variant="secondary" className={styles.resetButton} onClick={handleReset}>
                 Скинути фільтри
-            </button>
+            </Button>
         </form>
     );
 };

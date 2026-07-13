@@ -1,0 +1,28 @@
+.field {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+}
+
+.error {
+    font-size: 0.8rem;
+    color: var(--color-error);
+}
+
+.errorAbsolute {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 2px;
+    font-size: 0.8rem;
+    color: var(--color-error);
+    white-space: nowrap;
+    min-height: 1em;
+}
