@@ -9,3 +9,44 @@
     text-align: center;
     padding: var(--spacing-lg) 0;
 }
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+.pageButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.pageButton:hover:not(:disabled) {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #fff;
+}
+
+.pageButton:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.pageInfo {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    min-width: 60px;
+    text-align: center;
+}

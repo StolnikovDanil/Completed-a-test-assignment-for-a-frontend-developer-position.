@@ -5,7 +5,7 @@ import { filterFormSchema, type FilterFormValues } from '../../utils/validation'
 import { useDebounce } from '../../hooks/useDebounce';
 import type { FilterParams } from '../../types/vehicle';
 import styles from './FilterForm.module.css';
-import {z} from "zod";
+import { z } from 'zod';
 
 interface FilterFormProps {
     brands: string[];
@@ -43,14 +43,20 @@ const FilterForm = ({ brands, onFilterChange }: FilterFormProps) => {
         onFilterChange({
             search: debouncedSearch,
             brand: values.brand || null,
-            minPrice: values.minPrice as number | null,
-            maxPrice: values.maxPrice as number | null,
+            minPrice: errors.minPrice
+                ? Infinity
+                : (values.minPrice as number | null),
+            maxPrice: errors.maxPrice
+                ? -Infinity
+                : (values.maxPrice as number | null),
         });
     }, [
         debouncedSearch,
         values.brand,
         values.minPrice,
         values.maxPrice,
+        errors.minPrice,
+        errors.maxPrice,
         onFilterChange,
     ]);
 
@@ -119,11 +125,13 @@ const FilterForm = ({ brands, onFilterChange }: FilterFormProps) => {
                         })}
                     />
 
-                    {errors.minPrice && (
-                        <span className={styles.error}>
-                            {errors.minPrice.message}
-                        </span>
-                    )}
+                    <span
+                        className={`${styles.error} ${
+                            errors.minPrice ? styles.visible : ''
+                        }`}
+                    >
+                        {errors.minPrice?.message ?? '\u00A0'}
+                    </span>
                 </div>
 
                 <div className={styles.field}>
@@ -151,11 +159,13 @@ const FilterForm = ({ brands, onFilterChange }: FilterFormProps) => {
                         })}
                     />
 
-                    {errors.maxPrice && (
-                        <span className={styles.error}>
-                            {errors.maxPrice.message}
-                        </span>
-                    )}
+                    <span
+                        className={`${styles.error} ${
+                            errors.maxPrice ? styles.visible : ''
+                        }`}
+                    >
+                        {errors.maxPrice?.message ?? '\u00A0'}
+                    </span>
                 </div>
             </div>
 
