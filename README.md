@@ -43,7 +43,7 @@ npm run preview
 
 ## Деплой
 
-Проєкт задеплоєний на **Vercel**: `<посилання на деплой>`
+Проєкт задеплоєний на **Vercel**: `<https://completed-a-test-assignment-for-a-f.vercel.app>`
 
 Для деплою іншого форку:
 1. Залити репозиторій на GitHub
